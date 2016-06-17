@@ -3,7 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/R2D2/Documents/NetBeansProjects/ServidorFileSystem/src/java/com/webservice/filesystem/FileSystemService.java</file>
+            <file>file:/C:/Users/R2D2/Documents/NetBeansProjects/ServidorFileSystem/src/java/modelo/SistemaArchivo.java</file>
+            <file>file:/C:/Users/R2D2/Documents/NetBeansProjects/ServidorFileSystem/src/java/modelo/Almacenamiento.java</file>
+            <file>file:/C:/Users/R2D2/Documents/NetBeansProjects/ServidorFileSystem/src/java/modelo/DiscoVirtual.java</file>
         </group>
     </open-files>
 </project-private>
