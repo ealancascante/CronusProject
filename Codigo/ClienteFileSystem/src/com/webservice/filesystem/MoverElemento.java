@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="pRutaOrigen" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="pNombre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="pRutaDestino" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="pCliente" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
@@ -29,38 +29,38 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "moverElemento", propOrder = {
-    "pRutaOrigen",
+    "pNombre",
     "pRutaDestino",
     "pCliente"
 })
 public class MoverElemento {
 
-    protected String pRutaOrigen;
+    protected String pNombre;
     protected String pRutaDestino;
     protected String pCliente;
 
     /**
-     * Obtiene el valor de la propiedad pRutaOrigen.
+     * Obtiene el valor de la propiedad pNombre.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getPRutaOrigen() {
-        return pRutaOrigen;
+    public String getPNombre() {
+        return pNombre;
     }
 
     /**
-     * Define el valor de la propiedad pRutaOrigen.
+     * Define el valor de la propiedad pNombre.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setPRutaOrigen(String value) {
-        this.pRutaOrigen = value;
+    public void setPNombre(String value) {
+        this.pNombre = value;
     }
 
     /**

@@ -7,16 +7,15 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para removerElemento complex type.
+ * <p>Clase Java para obtenerRuta complex type.
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
- * &lt;complexType name="removerElemento">
+ * &lt;complexType name="obtenerRuta">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="pNombre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="pCliente" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -27,38 +26,12 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "removerElemento", propOrder = {
-    "pNombre",
+@XmlType(name = "obtenerRuta", propOrder = {
     "pCliente"
 })
-public class RemoverElemento {
+public class ObtenerRuta {
 
-    protected String pNombre;
     protected String pCliente;
-
-    /**
-     * Obtiene el valor de la propiedad pNombre.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getPNombre() {
-        return pNombre;
-    }
-
-    /**
-     * Define el valor de la propiedad pNombre.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setPNombre(String value) {
-        this.pNombre = value;
-    }
 
     /**
      * Obtiene el valor de la propiedad pCliente.

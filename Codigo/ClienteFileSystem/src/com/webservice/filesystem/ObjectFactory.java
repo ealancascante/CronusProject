@@ -31,6 +31,7 @@ public class ObjectFactory {
     private final static QName _CrearArchivo_QNAME = new QName("http://filesystem.webservice.com/", "crearArchivo");
     private final static QName _GenerarArbolResponse_QNAME = new QName("http://filesystem.webservice.com/", "generarArbolResponse");
     private final static QName _CrearDiscoResponse_QNAME = new QName("http://filesystem.webservice.com/", "crearDiscoResponse");
+    private final static QName _ObtenerRutaResponse_QNAME = new QName("http://filesystem.webservice.com/", "obtenerRutaResponse");
     private final static QName _CrearDisco_QNAME = new QName("http://filesystem.webservice.com/", "crearDisco");
     private final static QName _ModificarArchivoResponse_QNAME = new QName("http://filesystem.webservice.com/", "modificarArchivoResponse");
     private final static QName _EncontrarElementoResponse_QNAME = new QName("http://filesystem.webservice.com/", "encontrarElementoResponse");
@@ -49,6 +50,7 @@ public class ObjectFactory {
     private final static QName _EncontrarElemento_QNAME = new QName("http://filesystem.webservice.com/", "encontrarElemento");
     private final static QName _GenerarArbol_QNAME = new QName("http://filesystem.webservice.com/", "generarArbol");
     private final static QName _CrearDirectorio_QNAME = new QName("http://filesystem.webservice.com/", "crearDirectorio");
+    private final static QName _ObtenerRuta_QNAME = new QName("http://filesystem.webservice.com/", "obtenerRuta");
     private final static QName _ModificarArchivo_QNAME = new QName("http://filesystem.webservice.com/", "modificarArchivo");
 
     /**
@@ -112,6 +114,14 @@ public class ObjectFactory {
      */
     public CrearDiscoResponse createCrearDiscoResponse() {
         return new CrearDiscoResponse();
+    }
+
+    /**
+     * Create an instance of {@link ObtenerRutaResponse }
+     * 
+     */
+    public ObtenerRutaResponse createObtenerRutaResponse() {
+        return new ObtenerRutaResponse();
     }
 
     /**
@@ -216,6 +226,14 @@ public class ObjectFactory {
      */
     public ModificarArchivo createModificarArchivo() {
         return new ModificarArchivo();
+    }
+
+    /**
+     * Create an instance of {@link ObtenerRuta }
+     * 
+     */
+    public ObtenerRuta createObtenerRuta() {
+        return new ObtenerRuta();
     }
 
     /**
@@ -327,6 +345,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://filesystem.webservice.com/", name = "crearDiscoResponse")
     public JAXBElement<CrearDiscoResponse> createCrearDiscoResponse(CrearDiscoResponse value) {
         return new JAXBElement<CrearDiscoResponse>(_CrearDiscoResponse_QNAME, CrearDiscoResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ObtenerRutaResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://filesystem.webservice.com/", name = "obtenerRutaResponse")
+    public JAXBElement<ObtenerRutaResponse> createObtenerRutaResponse(ObtenerRutaResponse value) {
+        return new JAXBElement<ObtenerRutaResponse>(_ObtenerRutaResponse_QNAME, ObtenerRutaResponse.class, null, value);
     }
 
     /**
@@ -489,6 +516,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://filesystem.webservice.com/", name = "crearDirectorio")
     public JAXBElement<CrearDirectorio> createCrearDirectorio(CrearDirectorio value) {
         return new JAXBElement<CrearDirectorio>(_CrearDirectorio_QNAME, CrearDirectorio.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ObtenerRuta }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://filesystem.webservice.com/", name = "obtenerRuta")
+    public JAXBElement<ObtenerRuta> createObtenerRuta(ObtenerRuta value) {
+        return new JAXBElement<ObtenerRuta>(_ObtenerRuta_QNAME, ObtenerRuta.class, null, value);
     }
 
     /**
