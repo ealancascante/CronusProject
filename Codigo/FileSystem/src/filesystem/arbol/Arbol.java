@@ -1,6 +1,7 @@
 package filesystem.arbol;
 
 import filesystem.EstructuraDato;
+import java.util.ArrayList;
 
 public class Arbol implements EstructuraDato{
     private Nodo raiz;
@@ -8,7 +9,7 @@ public class Arbol implements EstructuraDato{
     
     public Arbol(){
         raiz = new Nodo(null);
-        raiz.setElemento(new Elemento("raiz"));
+        raiz.setElemento(new Elemento("R:"));
         nodoActual = raiz;
     }
     
@@ -20,33 +21,55 @@ public class Arbol implements EstructuraDato{
     }
     
     @Override
-    public boolean recorrer(String[] pRuta){
-        Nodo nodoPuntero = nodoActual;
+    public boolean recorrer(String[] pRuta, String pTipoRuta){
+        Nodo nodoPuntero = null;
+        int contador = 0;
         
-        for(int contador = 0; contador < pRuta.length; contador++){
-          
+        if(pTipoRuta.equals("REAL")){
+            nodoPuntero = raiz;
+            contador++;
+        }
+        
+        if(pTipoRuta.equals("ACTUAL"))
+            nodoPuntero = nodoActual;
+        
+        if(nodoPuntero == null)
+           return false;
+         
+        while(contador < pRuta.length){
+            
+            /*      Si la ruta esta vacia lo ignora     */
+            if(pRuta[contador].equals("")){
+                contador++;
+                continue;
+            }
             /*      Verifica que el nodo no sea la raiz      */
             if(nodoPuntero.getPadre() != null ){
                 /*      Verifica si es el padre el que solicita     */
                 if(pRuta[contador].equals(nodoPuntero.getPadre().getElemento().getNombre())){
                      nodoPuntero = nodoPuntero.getPadre();
-                    continue;
-                }
-    
+                     contador++;
+                     continue;
+                }  
             }
-               
-            
+  
             /*      Verifica si el nodo que solicita esta en los hijos      */
-            if(nodoPuntero.buscarHijo(pRuta[contador]) >= 0)
-                nodoPuntero = nodoPuntero.getHijo().get(contador);
-            else
+            if(nodoPuntero.buscarHijo(pRuta[contador]) >= 0){
+                nodoPuntero = nodoPuntero.getHijo().get(nodoPuntero.buscarHijo(pRuta[contador]));  
+                
+            }else
                 return false;
+            
+            contador++;
+    
         }
-        
+  
         nodoActual = nodoPuntero;
+        
         return true;
         
     }
+    
     
     @Override
     public boolean agregarElemento(Elemento pElemento){
@@ -61,7 +84,7 @@ public class Arbol implements EstructuraDato{
     @Override
     public boolean eliminarElemento(String pNombre){
         /*      Verifica que existe     */
-        if(nodoActual.buscarHijo(pNombre) >= 0){               
+        if(nodoActual.buscarHijo(pNombre) >= 0){ 
              return nodoActual.eliminarHijo(pNombre);
         }
         return false;
@@ -135,4 +158,17 @@ public class Arbol implements EstructuraDato{
             return -1;
                 
     }
+    
+    @Override
+    public ArrayList<Elemento> obtenerElmentosContenidos(){
+        ArrayList<Elemento> listaElementos = new ArrayList <Elemento>();
+
+        for(int contador = 0; contador < nodoActual.cantidadHijos(); contador++){
+            listaElementos.add(nodoActual.getHijo().get(contador).getElemento()) ;
+        }
+        
+        return listaElementos;     
+    }
+    
+    
 }

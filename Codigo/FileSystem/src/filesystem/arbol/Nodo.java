@@ -41,7 +41,7 @@ public class Nodo {
     public boolean eliminarHijo (String pNombre){
         int indice = buscarHijo(pNombre);
         
-        if(indice>0){
+        if(indice>=0){
             this.hijo.remove(indice);
             return true;
         }else
