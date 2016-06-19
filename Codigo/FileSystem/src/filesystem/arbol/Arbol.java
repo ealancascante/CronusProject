@@ -1,7 +1,9 @@
 package filesystem.arbol;
 
+import Archivo.ArchivoTexto;
 import filesystem.EstructuraDato;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Arbol implements EstructuraDato{
     private Nodo raiz;
@@ -11,6 +13,10 @@ public class Arbol implements EstructuraDato{
         raiz = new Nodo(null);
         raiz.setElemento(new Elemento("R:"));
         nodoActual = raiz;
+    }
+    
+    public Nodo getRaiz(){
+        return raiz;
     }
     
     private String getNodoActual(){
@@ -170,5 +176,47 @@ public class Arbol implements EstructuraDato{
         return listaElementos;     
     }
     
-    
+      public void printFileSystem() {
+        // Call an auxiliary recursive method.
+        printFileSystem(0, raiz);
+      }// end printFileSystem
+
+      /**
+       * Print the file system structure in screen. This method is recursive, and is
+       * called over each subtree by specifying the root of the corresponding
+       * subtree.
+       * 
+       * @param level
+       *          Tree level where the root of the subtree is.
+       * @param root
+       *          Root folder of the subtree over which the method is applied.
+       */
+      private void printFileSystem(int level, Nodo root) {
+        // Check if the current root is not null
+        if (root != null) {
+          if (level > 0) {
+            // If level is greater than 0 (the root is not
+            // the root of whole file system)...
+            for (int i = 0; i < level; i++) {
+              // ...print as many white spaces as levels...
+              System.out.print(" ");
+            }
+            // ...and print the symbol representing the directory...
+            System.out.print("|_");
+          }
+          // ...print the name of the folder
+          
+          //verificamos si es un archivo o un directorio extra
+          if(root.getElemento() instanceof ArchivoTexto)
+              System.out.println(root.getElemento().getNombre());
+          else{
+            System.out.println(root.getElemento().getNombre());
+            for (int j = 0; j < root.getHijo().size(); j++) {
+              // Take each subdirectory as root of a subtree, and
+              // apply the method over that subtree
+              printFileSystem(level + 1, root.getHijo().get(j));
+            }
+          }
+        }// end printFileSystem
+    }
 }
