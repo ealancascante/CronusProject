@@ -30,13 +30,17 @@ public class Nodo {
         elemento = pElemento;
     }
     
+    public void agregarHijoNodo(Nodo pNodo){
+        this.hijo.add(pNodo); 
+    }
+    
     public void agregarHijo(Elemento pElemento){
         Nodo nuevoNodo = new Nodo(this);
         nuevoNodo.setElemento(pElemento);
         this.hijo.add(nuevoNodo); 
     }
     
-    public boolean eliminarHijo (String pNombre){
+    public boolean eliminarNodoHijo (String pNombre){
         int indice = buscarHijo(pNombre);
         
         if(indice>=0){

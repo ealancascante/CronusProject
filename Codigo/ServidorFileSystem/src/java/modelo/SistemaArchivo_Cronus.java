@@ -1,7 +1,9 @@
 
 package modelo;
 
+import Arbol.Arbol;
 import Arbol.Elemento;
+import Arbol.Nodo;
 import java.util.ArrayList;
 import modelo.Archivo.Archivo;
 import modelo.Archivo.ArchivoTexto;
@@ -48,8 +50,9 @@ public class SistemaArchivo_Cronus implements SistemaArchivo{
         for(int contador = 0; contador < listaArchivos.length; contador++){
             System.out.print(" "+listaArchivos[contador]);
         }
-            System.out.print("\n listaDespues");
         */
+         //System.out.print("\n listaDespues");
+        
         String[] listaLimpia = bucarCaracteresEspeciales(listaArchivos);
         
         if(listaLimpia[0].equals("$:\\Error"))
@@ -75,37 +78,43 @@ public class SistemaArchivo_Cronus implements SistemaArchivo{
     
     @Override
     public boolean cambiarNombreElemento(String pNombreViejo, String pNombreNuevo){
-        Elemento modificarElemento = estructura.obtenerElemento(pNombreViejo);
+        Nodo modificarNodo = estructura.obtenerNodoHijo(pNombreViejo);
         
         /*      Verifica que exista     */
-        if(modificarElemento == null)
+        if(modificarNodo == null)
             return false;
-        
-        modificarElemento.setNombre(pNombreNuevo);
+        Elemento elemento = modificarNodo.getElemento();
+        elemento.setNombre(pNombreNuevo);
         
         /*      Verifica si es un archivo de texto      */
-        if(obtenerTipoElemento(modificarElemento).equals("ArchivoTexto")){
+        if(obtenerTipoElemento(elemento).equals("ArchivoTexto")){
             
-            ArchivoTexto nuevoArchivo = (ArchivoTexto)modificarElemento;            
+            ArchivoTexto nuevoArchivo = (ArchivoTexto)elemento;            
             nuevoArchivo.setExtension(pNombreNuevo);
+            /*      Devolvemos el element modificado        */
+            modificarNodo.setElemento(nuevoArchivo);
             
             return estructura.agregarElemento(nuevoArchivo);  
     }
         
-        return estructura.agregarElemento(modificarElemento);  
+        return estructura.agregarElemento(elemento);  
       
     }
     
     @Override
     public boolean modificarContenidoArchivoTexto(String pNombre, String pContenido, long pTamano){
-        Elemento modificarElemento = estructura.obtenerElemento(pNombre);     
+        Nodo modificarNodo = estructura.obtenerNodoHijo(pNombre);     
         
         /*      Verifica que exista y sea un archivo de texto      */
-        if(modificarElemento != null && obtenerTipoElemento(modificarElemento).equals("ArchivoTexto")){
+        if(modificarNodo != null && obtenerTipoElemento(modificarNodo.getElemento()).equals("ArchivoTexto")){
          
-            ArchivoTexto nuevoArchivo = (ArchivoTexto)modificarElemento;            
+            ArchivoTexto nuevoArchivo = (ArchivoTexto)modificarNodo.getElemento();            
             nuevoArchivo.setContenido(pContenido);
             nuevoArchivo.setTamano(pTamano);
+            
+            modificarNodo.setElemento(nuevoArchivo);
+            estructura.eliminarElemento(pNombre);
+            estructura.agregarNodo(modificarNodo);
             
             return true;  
         }
@@ -157,25 +166,25 @@ public class SistemaArchivo_Cronus implements SistemaArchivo{
     @Override
     public boolean copiarElemento(String pNombre, String pRuta){
         
-        Elemento elementoCopiar = estructura.obtenerElemento(pNombre);
+        Nodo nodoCopiar = estructura.obtenerNodoHijo(pNombre);
         String[] listaArchivos = seprarRuta(pRuta);
         
         /*      Verifica que exista     */
-        if(elementoCopiar == null)
+        if(nodoCopiar == null)
             return false;
-     
-       return agregarArchivoRuta((Archivo)elementoCopiar,listaArchivos); 
+
+       return agregarArchivoRuta(nodoCopiar,listaArchivos); 
     }
     
     @Override
     public boolean moverElemento (String pNombre, String pRuta){
-        Elemento elementoCopiar = estructura.obtenerElemento(pNombre);
+        Nodo nodoCopiar = estructura.obtenerNodoHijo(pNombre);
         String[] listaArchivos = seprarRuta(pRuta);
 
         boolean exito;
         
         /*      Verifica que exista     */
-        if(elementoCopiar == null)
+        if(nodoCopiar == null)
             return false;
         /*      Elimina el elemento     */
         exito = estructura.eliminarElemento(pNombre);
@@ -183,12 +192,14 @@ public class SistemaArchivo_Cronus implements SistemaArchivo{
         if(exito == false)
             return false;
         
-        return agregarArchivoRuta((Archivo)elementoCopiar,listaArchivos);
+        return agregarArchivoRuta(nodoCopiar,listaArchivos);
     
     }
     
     @Override
     public String obtenerRutaActual(){
+        Arbol ar = (Arbol)estructura;
+        System.out.println("NODO "+ar.getNodoActual());
         return rutaActual;
     }
     
@@ -226,11 +237,10 @@ public class SistemaArchivo_Cronus implements SistemaArchivo{
     private String[] bucarCaracteresEspeciales(String[] pRuta){
         
         String punteroActual = rutaActual;
-        
+
         for(int contador = 0; contador < pRuta.length; contador++){
             
-            if(pRuta[contador].equals("..")){
-                
+            if(pRuta[contador].equals("..")){                
                 String dirPadre = getDirectorioPadre(punteroActual);
                 if(!dirPadre.equals("")){
                     pRuta[contador] = dirPadre;
@@ -269,6 +279,36 @@ public class SistemaArchivo_Cronus implements SistemaArchivo{
         return pActual;
     }
     
+    private String cambiarRutaReal(String[] pRuta, String pActual){
+        String[] pRutaActual = seprarRuta (pActual);
+        int contadorRuta = 0;
+        String dirPadre;
+        
+        /*      Se mueve hasta a donde ambas ruta son iguales        */
+        while((pRuta.length < contadorRuta && pRutaActual.length < contadorRuta)){
+            if( !pRutaActual[contadorRuta].equals(pRutaActual[contadorRuta]) )
+                break;
+            contadorRuta++;    
+        }
+        
+        /*      Cambia la ruta      */
+        for(int contador = contadorRuta; contador < pRuta.length; contador++){
+            dirPadre = getDirectorioPadre(pActual);
+            if(!dirPadre.equals("") && pRuta[contador].equals(dirPadre)){                           
+                pActual = deveolverUnDirectorio(pActual);
+                continue;
+            }
+            
+            if(pRuta[contador].equals(""))
+                continue;
+            
+            pActual+= pRuta[contador]+"\\";
+
+        }
+        
+        return pActual;
+    }
+    
     private String getDirectorioPadre(String pActual){
         String[] parteRuta = seprarRuta(pActual);
        
@@ -289,20 +329,25 @@ public class SistemaArchivo_Cronus implements SistemaArchivo{
         return rutaParte[0];
     }
     
-    private boolean agregarArchivoRuta(Archivo pArchivo, String[] pRuta){
+    private boolean agregarArchivoRuta(Nodo pNodo, String[] pRuta){
         String tipo;
         boolean exito;
-          
-        if("R:".equals(pRuta[0]))
+        String[] listaLimpia = bucarCaracteresEspeciales(pRuta);
+        
+        if("R:".equals(listaLimpia[0]))
             tipo = "REAL";
         else
             tipo = "ACTUAL";
         
-        exito = estructura.recorrer(pRuta,tipo);
+        exito = estructura.recorrer(listaLimpia,tipo);
         
-        if(exito)
-            return estructura.agregarElemento(pArchivo);  
-        else
+        if(exito){
+            if(tipo.equals("ACTUAL"))
+                rutaActual = cambiarRuta(listaLimpia,rutaActual);
+            else
+               rutaActual = cambiarRutaReal(listaLimpia,rutaActual);
+            return estructura.agregarNodo(pNodo);  
+        }else
             return false;
     }
     

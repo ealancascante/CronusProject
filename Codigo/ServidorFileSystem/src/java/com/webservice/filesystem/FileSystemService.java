@@ -1,5 +1,6 @@
 package com.webservice.filesystem;
 
+import Controlador.Controlador;
 import Controlador.InterfaceControlador;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -8,7 +9,7 @@ import javax.jws.WebService;
 @WebService
 public class FileSystemService{
 
-    private InterfaceControlador controlador;
+    private InterfaceControlador controlador = new Controlador();
     /*  Metodos que se van a compartir mediante el presente web service del FS*/
     @WebMethod
     public String crearDisco (@WebParam(name = "pSectores") int pSectores, 

@@ -17,7 +17,7 @@ public class Arbol implements EstructuraDato{
         nodoActual = raiz;
     }
     
-    private String getNodoActual(){
+    public String getNodoActual(){
         if(nodoActual == raiz)
             return "raiz";
         else
@@ -59,8 +59,9 @@ public class Arbol implements EstructuraDato{
   
             /*      Verifica si el nodo que solicita esta en los hijos      */
             if(nodoPuntero.buscarHijo(pRuta[contador]) >= 0){
-                nodoPuntero = nodoPuntero.getHijo().get(nodoPuntero.buscarHijo(pRuta[contador]));  
-                
+                nodoPuntero = nodoPuntero.getHijo().get(nodoPuntero.buscarHijo(pRuta[contador]));
+                if(nodoPuntero.getElemento().getClass().getSimpleName() == "ArchivoTexto")
+                    return false;
             }else
                 return false;
             
@@ -74,6 +75,14 @@ public class Arbol implements EstructuraDato{
         
     }
     
+    public boolean agregarNodo(Nodo pNodo){
+        /*      Veifica si ya existe        */
+        if(nodoActual.buscarHijo(pNodo.getElemento().getNombre()) == -1){               
+            nodoActual.agregarHijoNodo(pNodo);
+            return true;   
+        }
+        return false;
+    }
     
     @Override
     public boolean agregarElemento(Elemento pElemento){
@@ -89,7 +98,7 @@ public class Arbol implements EstructuraDato{
     public boolean eliminarElemento(String pNombre){
         /*      Verifica que existe     */
         if(nodoActual.buscarHijo(pNombre) >= 0){ 
-             return nodoActual.eliminarHijo(pNombre);
+             return nodoActual.eliminarNodoHijo(pNombre);
         }
         return false;
     }
@@ -112,7 +121,21 @@ public class Arbol implements EstructuraDato{
         }
         return null;
     }
+        
+     
+    /*      Devuelve un Null si no encuetra el nodo     */
+    @Override
+     public Nodo obtenerNodoHijo(String pNombre){  
+        
+        /*      Verifica si es algunos de los hijos     */
+        if(nodoActual.buscarHijo(pNombre) >= 0){               
+             return nodoActual.getHijo().get(nodoActual.buscarHijo(pNombre));
+        }
+        
+        return null;
+    }
     
+     
     /*      Devuelve un Null si no encuetra el nodo     */
     private Nodo obtenerNodo(String pNombre){
         /*      Verifica si es el nodo actual       */
@@ -131,7 +154,6 @@ public class Arbol implements EstructuraDato{
     public String mostrarEstructura(){
         stringArbol = "";
         recorreArbol(0, raiz);
-        System.out.println(stringArbol);
         return stringArbol;
     }
 

@@ -118,7 +118,7 @@ public class Controlador implements InterfaceControlador{
         
         dtoPropiedades = almacenamiento.verPropiedadesElemento(pNombre);
         
-        return (String) dtoPropiedades.buscarLlave("contenidoArhivo");
+        return (String) dtoPropiedades.buscarLlave("propiedadesArchivo");
     }
      
     @Override
@@ -186,7 +186,7 @@ public class Controlador implements InterfaceControlador{
         if(almacenamiento == null)
             return "Usuario invalido";
         
-        dtoEncontrar = almacenamiento.buscarArchivo(pCliente);
+        dtoEncontrar = almacenamiento.buscarArchivo(pRuta);
         
         return (String) dtoEncontrar.buscarLlave("buscarArchivo");
     }
@@ -216,7 +216,7 @@ public class Controlador implements InterfaceControlador{
         
         dtoRuta = almacenamiento.obtenerRutaActual();
         
-        return (String) dtoRuta.buscarLlave("agregarDirectorio");
+        return (String) dtoRuta.buscarLlave("rutaActual");
     }
     
     private Almacenamiento getDisco(String pCliente){
