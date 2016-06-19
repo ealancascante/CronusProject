@@ -48,11 +48,12 @@ public class FileSystem {
         
         System.out.println(arbol.mostrarEstructura());
 
-         
+         */
+       
         /*long i = arbol.obtenerNodo("Elem12").calcularTamanoElemento();
         System.out.println(" long "+i);*/
        
-       SistemaArchivo_Cronus sistem = new SistemaArchivo_Cronus();
+       /*SistemaArchivo_Cronus sistem = new SistemaArchivo_Cronus();
        sistem.agregarArchivoTexto("Archivo1.jpg", 1, "Este es el archivo 1");
        sistem.agregarDirectorio("Directorio1");
        sistem.agregarDirectorio("Directorio2");
@@ -75,6 +76,7 @@ public class FileSystem {
        sistem.agregarArchivoTexto("Archivo4.jpg", 7, "Este es el archivo 4");
        
        System.out.println(sistem.mostrarArbol());
+        */
        
       /* System.out.println(sistem.borrarElemento("Archivo4.jpg"));
         
@@ -84,7 +86,7 @@ public class FileSystem {
         
        System.out.println(sistem.mostrarArbol());*/
        
-       sistem.modificarContenidoArchivoTexto("Archivo1.jpg", "Hola cambiel el archivo", 500);
+      /* sistem.modificarContenidoArchivoTexto("Archivo1.jpg", "Hola cambiel el archivo", 500);
        
        System.out.println(sistem.mostrarArbol());
        
@@ -104,11 +106,30 @@ public class FileSystem {
        //System.out.println("Copiando \n"+sistem.moverElemento("Archivo1.jpg", "R:\\Directorio1\\Directorio3"));
        
        System.out.println("Copiando \n"+sistem.moverElemento("Archivo1.jpg", "Directorio1\\Directorio3"));
-       System.out.println(sistem.mostrarArbol());
+       System.out.println(sistem.mostrarArbol()); 
+       */
        
-       
-       
-       
+       Almacenamiento disco = new DiscoVirtual();
+       disco.inicializarDisco(10, 10);
+       System.out.println( disco.agregarArchivoTexto("Archivo.txt", "Hola arhivo") );
+       System.out.println( disco.agregarDirectorio("Directorio1") );
+       System.out.println( disco.agregarDirectorio("Directorio2") );
+       System.out.println( disco.listarElementos() );
+       System.out.println( disco.verPropiedadesElemento("Archivo.txt") );
+       System.out.println( disco.navegar("Directorio1\\..\\Directorio2") );
+       System.out.println( disco.navegar("..") );
+       System.out.println( disco.mostrarArbol() );
+       System.out.println( disco.borrarElemento("Archivo.txt") );
+       System.out.println( disco.mostrarArbol() );
+       System.out.println( disco.agregarArchivoTexto("Archivo2.txt", "Hola arhivo 2.0") );
+       System.out.println( disco.mostrarArbol() );
+       //System.out.println( disco.copiarElemento("Archivo2.txt", "Directorio2") );
+       //System.out.println( disco.moverElemnto("Archivo2.txt", "Directorio2") );
+       System.out.println( disco.getSectoresDisponibles() );
+       System.out.println( disco.mostrarArbol() );
+       System.out.println( disco.navegar(".") );
+       System.out.println( disco.modificarContenidoArchivoTexto("Archivo2.txt", "Nuevo Contenido") );
+       System.out.println( disco.mostrarContenidoArchivoTexto("Archivo2.txt") );
     }
     
 }

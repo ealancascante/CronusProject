@@ -44,20 +44,24 @@ public class SistemaArchivo_Cronus implements SistemaArchivo {
     public boolean navegar(String pRuta){
         String[] listaArchivos = seprarRuta(pRuta);
         boolean exito;
-            System.out.print("\n listaAntes");
+        /*    
+        System.out.print("\n listaAntes");
         for(int contador = 0; contador < listaArchivos.length; contador++){
             System.out.print(" "+listaArchivos[contador]);
         }
             System.out.print("\n listaDespues");
+        */
         String[] listaLimpia = bucarCaracteresEspeciales(listaArchivos);
         
         if(listaLimpia[0].equals("$:\\Error"))
             return false;
         
+        /*
         for(int contador = 0; contador < listaArchivos.length; contador++){
             System.out.print(" "+listaLimpia[contador]);
         }
             System.out.print("\n");
+        */
         exito = estructura.recorrer(listaLimpia, "ACTUAL");
         if(exito)
             rutaActual = cambiarRuta(listaLimpia, rutaActual);
@@ -224,7 +228,6 @@ public class SistemaArchivo_Cronus implements SistemaArchivo {
             if(pRuta[contador].equals("..")){
                 
                 String dirPadre = getDirectorioPadre(punteroActual);
-
                 if(!dirPadre.equals("")){
                     pRuta[contador] = dirPadre;
                     punteroActual = deveolverUnDirectorio(punteroActual);
@@ -232,8 +235,11 @@ public class SistemaArchivo_Cronus implements SistemaArchivo {
                     pRuta[0] = "$:\\Error";
             }
             
-            if(pRuta[contador].equals("."))
+            if(pRuta[contador].equals(".")){
                 pRuta[contador] = "";
+                continue;
+            }
+            punteroActual += pRuta[contador]+ "\\";
             
         }
         return pRuta;
