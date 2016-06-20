@@ -36,5 +36,19 @@ public class VistaConsola {
                 + "Por favor, cree el disco.\n";
         System.out.print(bienvenida);
     }
-
+    
+    public String getDecision(){
+        String decision = "";
+        try{
+            while(!decision.toLowerCase().equals("y") && !decision.toLowerCase().equals("n")){
+                System.out.println("Desea remplazar el original por uno nuevo?(Y/N): ");
+                BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+                decision = br.readLine();
+            }
+            return decision.toLowerCase();
+        }
+        catch(Exception e){
+            return "n";
+        }
+    }
 }

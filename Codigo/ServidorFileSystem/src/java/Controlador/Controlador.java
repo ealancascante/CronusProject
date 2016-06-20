@@ -31,7 +31,7 @@ public class Controlador implements InterfaceControlador{
             return "Usuario invalido";
         /*      Inicializamos el almacenamiento     */
         dtoUsuario = almacenamiento.crearUsuario();          
-        dtoCrear = almacenamiento.inicializarDisco(pCantidadSectores, pCantidadSectores);
+        dtoCrear = almacenamiento.inicializarDisco(pCantidadSectores, pTamanoSectores);
         
         return (String) dtoUsuario.buscarLlave("nombreUsuario");
     }

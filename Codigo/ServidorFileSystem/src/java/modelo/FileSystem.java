@@ -93,20 +93,20 @@ public class FileSystem {
        System.out.println( disco.obtenerRutaActual());
        System.out.println( disco.listarElementos());
     */
-      
+      /*
       Almacenamiento disco = new DiscoVirtual();
-       disco.inicializarDisco(1, 10);
-       disco.agregarArchivoTexto("a.txt", "Hola");
+       disco.inicializarDisco(1, 100);
+      System.out.println( disco.agregarArchivoTexto("aloa.txt", "Hola cmom esta"));
        System.out.println( disco.borrarElemento("a.txt"));
-       
+       */
        InterfaceControlador controlador = new Controlador();
-       String pCliente = controlador.crearDisco(10, 10);
+       String pCliente = controlador.crearDisco(1, 100);
        System.out.println( controlador.crearArchivo("arch1.doc", "dasda", pCliente));
        System.out.println( controlador.generarArbol(pCliente));
-       
+    /*   
         String cliente2 = controlador.crearDisco(10, 10);
         System.out.println( controlador.crearArchivo("arch2.doc", "dasda", cliente2));
-        System.out.println( controlador.generarArbol(cliente2));
+        System.out.println( controlador.generarArbol(cliente2));*/
     }
     
 }

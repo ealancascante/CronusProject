@@ -32,16 +32,27 @@ public class ControladorConsola {
                     if(discoCreado != false || comandoEntrada.get(0).equals("ayuda") || comandoEntrada.get(0).equals("salir")){
                         comandoEntrada.add(cliente);
                         respuesta = modelo.ejecutarComando(comandoEntrada);
+                        
                         if(comandoEntrada.get(0).equals("salir"))
                             terminarPrograma = true;
                         
+                        if((!comandoEntrada.get(0).equals("file") || !comandoEntrada.get(0).equals("mkdir")) && 
+                            (respuesta.contains("No se pudo crear"))){
+                            if(vista.getDecision().equals("y")){
+                                ArrayList<String> comandoFantasma = new ArrayList<>();
+                                comandoFantasma.add("remove");
+                                comandoFantasma.add(comandoEntrada.get(1));
+                                comandoFantasma.add(cliente);
+                                modelo.ejecutarComando(comandoFantasma);
+                                respuesta = modelo.ejecutarComando(comandoEntrada);
+                            }
+                        }
                         if(!comandoEntrada.get(0).equals("ayuda") && !comandoEntrada.get(0).equals("salir")){
                             comandoEntrada = new ArrayList<>();
                             comandoEntrada.add("ruta");
                             comandoEntrada.add(cliente);
                             rutaActual = modelo.ejecutarComando(comandoEntrada);
                         }
-                        
                     }
                     else
                         respuesta = "Error: Debe de crear un disco primero.";

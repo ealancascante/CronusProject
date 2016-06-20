@@ -16,7 +16,7 @@ public class FileSystemService{
                               @WebParam(name = "pTamano") int pTamano){
         
         System.out.println("Solicitó crear un disco! devuelve el nombre del usuario!");
-        return controlador.crearDisco(pSectores, pSectores);
+        return controlador.crearDisco(pSectores, pTamano);
     }
     
     @WebMethod

@@ -346,6 +346,7 @@ public class SistemaArchivo_Cronus implements SistemaArchivo{
                 rutaActual = cambiarRuta(listaLimpia,rutaActual);
             else
                rutaActual = cambiarRutaReal(listaLimpia,rutaActual);
+            
             return estructura.agregarNodo(pNodo);  
         }else
             return false;

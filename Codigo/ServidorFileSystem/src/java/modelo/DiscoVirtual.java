@@ -53,7 +53,7 @@ private long cantidadSectores;
         
         //calculamos la cantidad de sectores que ocupa el archivo :)
          long sectores = calcularCantidadSectores(tamano);
-             
+             System.out.println("cantidad de sectores: "+sectores +" tamano: "+tamano);
         if(ocuparSector(sectores)){
             if(sistemaArchivo.agregarArchivoTexto(pNombre, tamano, pContenido))          
                 mensaje = "Se almacenó en disco";
@@ -196,14 +196,12 @@ private long cantidadSectores;
         
         tamano = sistemaArchivo.obtenerTamanoArchivo(pNombre);
         
-        System.out.println("Sectores LiBre "+sectoresLibres);
         if(tamano != -1 && sistemaArchivo.borrarElemento(pNombre)){  
-            System.out.println("Tamano "+calcularCantidadSectores(tamano));
             liberarSector(calcularCantidadSectores(tamano));
             mensaje = "Se borro del disco";
+            System.out.println(" tamano "+tamano+" sectores "+liberarSector(calcularCantidadSectores(tamano)));
         }else
             mensaje = "No se pudo borrar el archivo " + pNombre;
-        System.out.println("Sectores LiBre "+sectoresLibres);
         dto.agregarElemento("borrarArchivo", mensaje);
         return dto;
     }
@@ -354,7 +352,6 @@ private long cantidadSectores;
         long sobrante = pTamano % tamanoSectores;
         if(sobrante > 0) 
             sectores++;
-        
         return sectores;
     }
 }
