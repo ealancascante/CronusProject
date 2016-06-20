@@ -43,7 +43,7 @@ public class ModeloCliente {
             case "mkdir":
                 comando = new Mkdir();
                 return comando.ejecutar(pTokens);
-            case "cambiardir":
+            case "cd":
                 comando = new Cambiardir();
                 return comando.ejecutar(pTokens);
             case "listardir":

@@ -18,6 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="pNombre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="pContenido" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="pExtension" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="pCliente" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -31,12 +32,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "crearArchivo", propOrder = {
     "pNombre",
     "pContenido",
+    "pExtension",
     "pCliente"
 })
 public class CrearArchivo {
 
     protected String pNombre;
     protected String pContenido;
+    protected String pExtension;
     protected String pCliente;
 
     /**
@@ -85,6 +88,30 @@ public class CrearArchivo {
      */
     public void setPContenido(String value) {
         this.pContenido = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad pExtension.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getPExtension() {
+        return pExtension;
+    }
+
+    /**
+     * Define el valor de la propiedad pExtension.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setPExtension(String value) {
+        this.pExtension = value;
     }
 
     /**

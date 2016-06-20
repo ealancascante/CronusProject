@@ -17,9 +17,11 @@ public class File implements IComando {
         contenido = pArrayTokens.get(2);
         cliente = pArrayTokens.get(3);
         
+        String[] partes = nombre.split("\\.");
+        
         FileSystemServiceService fileSystemService = new FileSystemServiceService();
         FileSystemService fsService = fileSystemService.getFileSystemServicePort();
-        String respuesta = fsService.crearArchivo(nombre, contenido, cliente);
+        String respuesta = fsService.crearArchivo(nombre, contenido, partes[1], cliente);
         return respuesta;
     }
     

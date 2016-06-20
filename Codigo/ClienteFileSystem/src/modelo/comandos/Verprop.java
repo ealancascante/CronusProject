@@ -11,12 +11,13 @@ public class Verprop  implements IComando {
     
     @Override
     public String ejecutar(ArrayList<String> pArrayTokens) {
-        String cliente;
-        cliente = pArrayTokens.get(1);
+        String cliente, nombre;
+        nombre = pArrayTokens.get(1);
+        cliente = pArrayTokens.get(2);
         
         FileSystemServiceService fileSystemService = new FileSystemServiceService();
         FileSystemService fsService = fileSystemService.getFileSystemServicePort();
-        String respuesta = fsService.listarDirectorio(cliente);
+        String respuesta = fsService.verPropiedades(nombre,cliente);
         return respuesta;
     }
     

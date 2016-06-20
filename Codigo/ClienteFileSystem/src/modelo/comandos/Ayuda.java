@@ -14,7 +14,7 @@ public class Ayuda implements IComando {
                 + "-> create <sectores> <tamañoSector> \n"
                 + "-> file <nombre> $:<contenido> \n"
                 + "-> mkdir <nombre>\n"
-                + "-> cambiardir <nombre>\n"
+                + "-> cd <nombre>\n"
                 + "-> listardir\n"
                 + "-> modfile <nombre> <nuevoContenido>\n"
                 + "-> verprop <nombre>\n"

@@ -18,7 +18,7 @@ public class ControladorConsola {
         vista = pVista;
         modelo = pModelo;
         comandos = new ArrayList<>();
-        comandos.addAll(Arrays.asList("create","file","mkdir","cambiardir","listardir",
+        comandos.addAll(Arrays.asList("create","file","mkdir","cd","listardir",
                                       "modfile","verprop","contfile","copy","mover",
                                       "remove", "find", "tree", "salir", "ayuda","ruta"));
     }
@@ -35,10 +35,12 @@ public class ControladorConsola {
                         if(comandoEntrada.get(0).equals("salir"))
                             terminarPrograma = true;
                         
-                        comandoEntrada = new ArrayList<>();
-                        comandoEntrada.add("ruta");
-                        comandoEntrada.add(cliente);
-                        rutaActual = modelo.ejecutarComando(comandoEntrada);
+                        if(!comandoEntrada.get(0).equals("ayuda") && !comandoEntrada.get(0).equals("salir")){
+                            comandoEntrada = new ArrayList<>();
+                            comandoEntrada.add("ruta");
+                            comandoEntrada.add(cliente);
+                            rutaActual = modelo.ejecutarComando(comandoEntrada);
+                        }
                         
                     }
                     else
@@ -96,7 +98,7 @@ public class ControladorConsola {
                 return fileValido();
             case "mkdir":
                 return mkdirValido();
-            case "cambiardir":
+            case "cd":
                 return cambiardirValido();
             case "listardir":
                 return listardirValido();
@@ -143,7 +145,8 @@ public class ControladorConsola {
     public boolean fileValido(){
         //file <nombre> $:<contenido>
         return(comandoEntrada.size() == 3 && isOcurrenciasString(comandoEntrada.get(1), ".", 1) && 
-              !comandoEntrada.get(1).contains("\\") && isOcurrenciasString(comandoEntrada.get(1), "r:", 0)); 
+              !comandoEntrada.get(1).contains("\\") && isOcurrenciasString(comandoEntrada.get(1), "r:", 0)
+                && isArchivoValido(comandoEntrada.get(1))); 
     }
     
     public boolean mkdirValido(){
@@ -155,7 +158,7 @@ public class ControladorConsola {
     public boolean cambiardirValido(){
         //cambiardir <ruta>
         return(comandoEntrada.size() == 2 && isMenorOcurrenciasString(comandoEntrada.get(1), "r:\\", 1) &&
-              !comandoEntrada.get(1).contains("\\r:") && isUnPunto(comandoEntrada.get(1))); 
+              !comandoEntrada.get(1).contains("\\r:")); 
     }
     
     public boolean listardirValido(){
@@ -296,5 +299,10 @@ public class ControladorConsola {
 
     public String getRutaActual() {
         return rutaActual;
+    }
+    
+    private boolean isArchivoValido(String pNombre){
+        String[] partes = pNombre.split("\\.");
+        return partes.length == 2;
     }
 }

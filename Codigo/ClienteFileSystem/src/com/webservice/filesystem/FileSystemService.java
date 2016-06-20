@@ -26,37 +26,25 @@ public interface FileSystemService {
 
     /**
      * 
-     * @param pRuta
-     * @param pCliente
-     * @return
-     *     returns java.lang.String
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "cambiarDirectorio", targetNamespace = "http://filesystem.webservice.com/", className = "com.webservice.filesystem.CambiarDirectorio")
-    @ResponseWrapper(localName = "cambiarDirectorioResponse", targetNamespace = "http://filesystem.webservice.com/", className = "com.webservice.filesystem.CambiarDirectorioResponse")
-    @Action(input = "http://filesystem.webservice.com/FileSystemService/cambiarDirectorioRequest", output = "http://filesystem.webservice.com/FileSystemService/cambiarDirectorioResponse")
-    public String cambiarDirectorio(
-        @WebParam(name = "pRuta", targetNamespace = "")
-        String pRuta,
-        @WebParam(name = "pCliente", targetNamespace = "")
-        String pCliente);
-
-    /**
-     * 
+     * @param pContenido
      * @param pNombre
      * @param pCliente
+     * @param pExtension
      * @return
      *     returns java.lang.String
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "encontrarElemento", targetNamespace = "http://filesystem.webservice.com/", className = "com.webservice.filesystem.EncontrarElemento")
-    @ResponseWrapper(localName = "encontrarElementoResponse", targetNamespace = "http://filesystem.webservice.com/", className = "com.webservice.filesystem.EncontrarElementoResponse")
-    @Action(input = "http://filesystem.webservice.com/FileSystemService/encontrarElementoRequest", output = "http://filesystem.webservice.com/FileSystemService/encontrarElementoResponse")
-    public String encontrarElemento(
+    @RequestWrapper(localName = "crearArchivo", targetNamespace = "http://filesystem.webservice.com/", className = "com.webservice.filesystem.CrearArchivo")
+    @ResponseWrapper(localName = "crearArchivoResponse", targetNamespace = "http://filesystem.webservice.com/", className = "com.webservice.filesystem.CrearArchivoResponse")
+    @Action(input = "http://filesystem.webservice.com/FileSystemService/crearArchivoRequest", output = "http://filesystem.webservice.com/FileSystemService/crearArchivoResponse")
+    public String crearArchivo(
         @WebParam(name = "pNombre", targetNamespace = "")
         String pNombre,
+        @WebParam(name = "pContenido", targetNamespace = "")
+        String pContenido,
+        @WebParam(name = "pExtension", targetNamespace = "")
+        String pExtension,
         @WebParam(name = "pCliente", targetNamespace = "")
         String pCliente);
 
@@ -77,27 +65,6 @@ public interface FileSystemService {
         int pSectores,
         @WebParam(name = "pTamano", targetNamespace = "")
         int pTamano);
-
-    /**
-     * 
-     * @param pContenido
-     * @param pNombre
-     * @param pCliente
-     * @return
-     *     returns java.lang.String
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "crearArchivo", targetNamespace = "http://filesystem.webservice.com/", className = "com.webservice.filesystem.CrearArchivo")
-    @ResponseWrapper(localName = "crearArchivoResponse", targetNamespace = "http://filesystem.webservice.com/", className = "com.webservice.filesystem.CrearArchivoResponse")
-    @Action(input = "http://filesystem.webservice.com/FileSystemService/crearArchivoRequest", output = "http://filesystem.webservice.com/FileSystemService/crearArchivoResponse")
-    public String crearArchivo(
-        @WebParam(name = "pNombre", targetNamespace = "")
-        String pNombre,
-        @WebParam(name = "pContenido", targetNamespace = "")
-        String pContenido,
-        @WebParam(name = "pCliente", targetNamespace = "")
-        String pCliente);
 
     /**
      * 
@@ -192,7 +159,7 @@ public interface FileSystemService {
     /**
      * 
      * @param pRutaDestino
-     * @param pNombre
+     * @param pRutaOrigen
      * @param pCliente
      * @return
      *     returns java.lang.String
@@ -203,8 +170,8 @@ public interface FileSystemService {
     @ResponseWrapper(localName = "copiarElementoResponse", targetNamespace = "http://filesystem.webservice.com/", className = "com.webservice.filesystem.CopiarElementoResponse")
     @Action(input = "http://filesystem.webservice.com/FileSystemService/copiarElementoRequest", output = "http://filesystem.webservice.com/FileSystemService/copiarElementoResponse")
     public String copiarElemento(
-        @WebParam(name = "pNombre", targetNamespace = "")
-        String pNombre,
+        @WebParam(name = "pRutaOrigen", targetNamespace = "")
+        String pRutaOrigen,
         @WebParam(name = "pRutaDestino", targetNamespace = "")
         String pRutaDestino,
         @WebParam(name = "pCliente", targetNamespace = "")
@@ -213,7 +180,7 @@ public interface FileSystemService {
     /**
      * 
      * @param pRutaDestino
-     * @param pNombre
+     * @param pRutaOrigen
      * @param pCliente
      * @return
      *     returns java.lang.String
@@ -224,8 +191,8 @@ public interface FileSystemService {
     @ResponseWrapper(localName = "moverElementoResponse", targetNamespace = "http://filesystem.webservice.com/", className = "com.webservice.filesystem.MoverElementoResponse")
     @Action(input = "http://filesystem.webservice.com/FileSystemService/moverElementoRequest", output = "http://filesystem.webservice.com/FileSystemService/moverElementoResponse")
     public String moverElemento(
-        @WebParam(name = "pNombre", targetNamespace = "")
-        String pNombre,
+        @WebParam(name = "pRutaOrigen", targetNamespace = "")
+        String pRutaOrigen,
         @WebParam(name = "pRutaDestino", targetNamespace = "")
         String pRutaDestino,
         @WebParam(name = "pCliente", targetNamespace = "")
@@ -233,7 +200,7 @@ public interface FileSystemService {
 
     /**
      * 
-     * @param pNombre
+     * @param pRutaOrigen
      * @param pCliente
      * @return
      *     returns java.lang.String
@@ -244,8 +211,8 @@ public interface FileSystemService {
     @ResponseWrapper(localName = "removerElementoResponse", targetNamespace = "http://filesystem.webservice.com/", className = "com.webservice.filesystem.RemoverElementoResponse")
     @Action(input = "http://filesystem.webservice.com/FileSystemService/removerElementoRequest", output = "http://filesystem.webservice.com/FileSystemService/removerElementoResponse")
     public String removerElemento(
-        @WebParam(name = "pNombre", targetNamespace = "")
-        String pNombre,
+        @WebParam(name = "pRutaOrigen", targetNamespace = "")
+        String pRutaOrigen,
         @WebParam(name = "pCliente", targetNamespace = "")
         String pCliente);
 
@@ -276,6 +243,42 @@ public interface FileSystemService {
     @ResponseWrapper(localName = "obtenerRutaResponse", targetNamespace = "http://filesystem.webservice.com/", className = "com.webservice.filesystem.ObtenerRutaResponse")
     @Action(input = "http://filesystem.webservice.com/FileSystemService/obtenerRutaRequest", output = "http://filesystem.webservice.com/FileSystemService/obtenerRutaResponse")
     public String obtenerRuta(
+        @WebParam(name = "pCliente", targetNamespace = "")
+        String pCliente);
+
+    /**
+     * 
+     * @param pRuta
+     * @param pCliente
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "cambiarDirectorio", targetNamespace = "http://filesystem.webservice.com/", className = "com.webservice.filesystem.CambiarDirectorio")
+    @ResponseWrapper(localName = "cambiarDirectorioResponse", targetNamespace = "http://filesystem.webservice.com/", className = "com.webservice.filesystem.CambiarDirectorioResponse")
+    @Action(input = "http://filesystem.webservice.com/FileSystemService/cambiarDirectorioRequest", output = "http://filesystem.webservice.com/FileSystemService/cambiarDirectorioResponse")
+    public String cambiarDirectorio(
+        @WebParam(name = "pRuta", targetNamespace = "")
+        String pRuta,
+        @WebParam(name = "pCliente", targetNamespace = "")
+        String pCliente);
+
+    /**
+     * 
+     * @param pNombre
+     * @param pCliente
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "encontrarElemento", targetNamespace = "http://filesystem.webservice.com/", className = "com.webservice.filesystem.EncontrarElemento")
+    @ResponseWrapper(localName = "encontrarElementoResponse", targetNamespace = "http://filesystem.webservice.com/", className = "com.webservice.filesystem.EncontrarElementoResponse")
+    @Action(input = "http://filesystem.webservice.com/FileSystemService/encontrarElementoRequest", output = "http://filesystem.webservice.com/FileSystemService/encontrarElementoResponse")
+    public String encontrarElemento(
+        @WebParam(name = "pNombre", targetNamespace = "")
+        String pNombre,
         @WebParam(name = "pCliente", targetNamespace = "")
         String pCliente);
 
