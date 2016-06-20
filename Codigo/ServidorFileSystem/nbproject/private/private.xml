@@ -5,8 +5,11 @@
         <group>
             <file>file:/C:/Users/Alex/Documents/TEC/2016/S1/SistemasOperativos/Proyecto3/ServidorFileSystem/src/java/modelo/DiscoVirtual.java</file>
             <file>file:/C:/Users/Alex/Documents/TEC/2016/S1/SistemasOperativos/Proyecto3/ServidorFileSystem/src/java/Controlador/Controlador.java</file>
-            <file>file:/C:/Users/Alex/Documents/TEC/2016/S1/SistemasOperativos/Proyecto3/ServidorFileSystem/src/java/Controlador/InterfaceControlador.java</file>
-            <file>file:/C:/Users/Alex/Documents/TEC/2016/S1/SistemasOperativos/Proyecto3/ServidorFileSystem/src/java/com/webservice/filesystem/FileSystemService.java</file>
+            <file>file:/C:/Users/Alex/Documents/TEC/2016/S1/SistemasOperativos/Proyecto3/ServidorFileSystem/src/java/Arbol/Nodo.java</file>
+            <file>file:/C:/Users/Alex/Documents/TEC/2016/S1/SistemasOperativos/Proyecto3/ServidorFileSystem/src/java/modelo/FileSystem.java</file>
+            <file>file:/C:/Users/Alex/Documents/TEC/2016/S1/SistemasOperativos/Proyecto3/ServidorFileSystem/src/java/modelo/SistemaArchivo_Cronus.java</file>
+            <file>file:/C:/Users/Alex/Documents/TEC/2016/S1/SistemasOperativos/Proyecto3/ServidorFileSystem/src/java/Arbol/Arbol.java</file>
+            <file>file:/C:/Users/Alex/Documents/TEC/2016/S1/SistemasOperativos/Proyecto3/ServidorFileSystem/src/java/modelo/EstructuraDato.java</file>
         </group>
     </open-files>
 </project-private>

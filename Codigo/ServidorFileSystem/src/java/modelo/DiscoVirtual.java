@@ -195,12 +195,15 @@ private long cantidadSectores;
         long tamano;
         
         tamano = sistemaArchivo.obtenerTamanoArchivo(pNombre);
-        if(tamano != -1 && sistemaArchivo.borrarElemento(pNombre)){   
+        
+        System.out.println("Sectores LiBre "+sectoresLibres);
+        if(tamano != -1 && sistemaArchivo.borrarElemento(pNombre)){  
+            System.out.println("Tamano "+calcularCantidadSectores(tamano));
             liberarSector(calcularCantidadSectores(tamano));
             mensaje = "Se borro del disco";
         }else
             mensaje = "No se pudo borrar el archivo " + pNombre;
-        
+        System.out.println("Sectores LiBre "+sectoresLibres);
         dto.agregarElemento("borrarArchivo", mensaje);
         return dto;
     }
@@ -331,7 +334,7 @@ private long cantidadSectores;
     }
     
     private boolean liberarSector(long pCantidad){
-        if(cantidadSectores > pCantidad){
+        if(cantidadSectores >= pCantidad){
             sectoresLibres += pCantidad;
             return true;
         }

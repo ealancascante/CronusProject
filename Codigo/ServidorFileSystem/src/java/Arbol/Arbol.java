@@ -59,9 +59,14 @@ public class Arbol implements EstructuraDato{
   
             /*      Verifica si el nodo que solicita esta en los hijos      */
             if(nodoPuntero.buscarHijo(pRuta[contador]) >= 0){
-                nodoPuntero = nodoPuntero.getHijo().get(nodoPuntero.buscarHijo(pRuta[contador]));
-                if(nodoPuntero.getElemento().getClass().getSimpleName() == "ArchivoTexto")
+                /*      Bueca el nombre del elemento en los hijo del nodo que apuanta el puntero        */
+                Nodo nodoEncontrado = nodoPuntero.getHijo().get(nodoPuntero.buscarHijo(pRuta[contador]));
+                /*      Verifica si el nodo del elemento que se esta buscando es un Arhivo de texto     */
+                if(nodoEncontrado.getElemento().getClass().getSimpleName().equals("ArchivoTexto"))
                     return false;
+                
+                nodoPuntero = nodoEncontrado;
+               
             }else
                 return false;
             

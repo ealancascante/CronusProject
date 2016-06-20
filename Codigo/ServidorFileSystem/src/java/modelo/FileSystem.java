@@ -32,7 +32,8 @@ public class FileSystem {
        System.out.println( disco.buscarArchivo("Archivo2.txt"));
        */
        
-       InterfaceControlador controlador = new Controlador();
+      /*
+        InterfaceControlador controlador = new Controlador();
        String pCliente = controlador.crearDisco(10, 10);
        System.out.println( pCliente );
        System.out.println( controlador.crearArchivo("Arch1.txt", "Este es el Arch1", pCliente));
@@ -70,6 +71,42 @@ public class FileSystem {
         System.out.println( controlador.listarDirectorio(pCliente) );
         
         System.out.println(controlador.encontrarElemento("Arch1.txt", pCliente));
+        
+        System.out.println(controlador.modificarArchivo(pCliente, pCliente, pCliente));
+        
+        System.out.println( controlador.cambiarDirectorio("..\\..\\Arch1.txt", pCliente) );
+        System.out.println( controlador.verPropiedades("Dir1", pCliente));
+    */
+        
+      /*Almacenamiento disco = new DiscoVirtual();
+       disco.inicializarDisco(10, 10);
+       disco.agregarArchivoTexto("a.txt", "Hola");
+       disco.agregarDirectorio("Dir1");
+       disco.navegar("Dir1");
+       disco.agregarDirectorio("Dir2");
+       disco.agregarDirectorio("Dir3");
+       disco.navegar("Dir3");
+       disco.agregarArchivoTexto("arh.txt", "Hola");
+       System.out.println( disco.mostrarArbol());
+       
+       System.out.println( disco.borrarElemento("arh.txt"));
+       System.out.println( disco.obtenerRutaActual());
+       System.out.println( disco.listarElementos());
+    */
+      
+      Almacenamiento disco = new DiscoVirtual();
+       disco.inicializarDisco(1, 10);
+       disco.agregarArchivoTexto("a.txt", "Hola");
+       System.out.println( disco.borrarElemento("a.txt"));
+       
+       InterfaceControlador controlador = new Controlador();
+       String pCliente = controlador.crearDisco(10, 10);
+       System.out.println( controlador.crearArchivo("arch1.doc", "dasda", pCliente));
+       System.out.println( controlador.generarArbol(pCliente));
+       
+        String cliente2 = controlador.crearDisco(10, 10);
+        System.out.println( controlador.crearArchivo("arch2.doc", "dasda", cliente2));
+        System.out.println( controlador.generarArbol(cliente2));
     }
     
 }

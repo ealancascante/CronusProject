@@ -58,12 +58,12 @@ public class SistemaArchivo_Cronus implements SistemaArchivo{
         if(listaLimpia[0].equals("$:\\Error"))
             return false;
         
-        /*
+        
         for(int contador = 0; contador < listaArchivos.length; contador++){
             System.out.print(" "+listaLimpia[contador]);
         }
             System.out.print("\n");
-        */
+        
         exito = estructura.recorrer(listaLimpia, "ACTUAL");
         if(exito)
             rutaActual = cambiarRuta(listaLimpia, rutaActual);
@@ -239,7 +239,6 @@ public class SistemaArchivo_Cronus implements SistemaArchivo{
         String punteroActual = rutaActual;
 
         for(int contador = 0; contador < pRuta.length; contador++){
-            
             if(pRuta[contador].equals("..")){                
                 String dirPadre = getDirectorioPadre(punteroActual);
                 if(!dirPadre.equals("")){
@@ -247,6 +246,7 @@ public class SistemaArchivo_Cronus implements SistemaArchivo{
                     punteroActual = deveolverUnDirectorio(punteroActual);
                 }else    /* Si el rutaActual es solo la raiz */
                     pRuta[0] = "$:\\Error";
+                continue;
             }
             
             if(pRuta[contador].equals(".")){
